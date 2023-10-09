@@ -1,0 +1,25 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=management-system-lib
+      - DB_USER=postgres
+      - DB_PASSWORD=0000
+    depends_on:
+      - db
+  db:
+    image: postgres:13
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_DB=management-system-lib
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=0000
