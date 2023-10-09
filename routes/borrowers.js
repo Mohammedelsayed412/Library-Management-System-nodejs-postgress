@@ -33,5 +33,4 @@ router.get('/:borrowerId/books', borrowerController.getBorrowedBooks);
 // Get overdue books
 router.get('/overdue', borrowerController.getOverdueBooks);
 
-
 module.exports = router;

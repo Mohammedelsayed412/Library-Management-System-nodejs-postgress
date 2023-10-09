@@ -8,7 +8,6 @@ const sequelize = require('./config/database');
 const app = express();
 const PORT = 3000;
 
-// Body parsing middleware
 app.use(bodyParser.json());
 
 // Routes
@@ -16,7 +15,7 @@ app.use('/api/books', bookRoutes);
 app.use('/api/borrowers', borrowerRoutes);
 app.use('/api/borrowedBooks', borrowedBooksRoutes);
 
-// Error handling middleware
+// Error handling
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).json({ error: 'Internal server error' });
