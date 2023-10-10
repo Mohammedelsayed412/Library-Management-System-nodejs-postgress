@@ -12,4 +12,10 @@ const limiter = rateLimit({
 // List all borrowedBooks
 router.get('/', limiter, borrowedBooksController.getAllBorrowedBooks);
 
+// Export overdue borrowedBooks of the last month as an Base64
+router.get('/export/overdue/base64', borrowedBooksController.exportOverdueBorrowedBooksBase64);
+
+// Export overdue borrowedBooks of the last month as an Excel file
+router.get('/export/overdue/xlsx', borrowedBooksController.exportOverdueBorrowedBooksXlsx);
+
 module.exports = router;

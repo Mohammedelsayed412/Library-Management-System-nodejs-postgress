@@ -107,7 +107,6 @@ exports.returnBook = async (req, res) => {
         borrowerId: borrowerId || '',
       },
     });
-    console.log('borrowedBook', borrowedBook);
     if (!borrowedBook) {
       return res.status(404).json({ error: 'Book is not checked out by this borrower' });
     }

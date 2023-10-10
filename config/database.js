@@ -8,16 +8,21 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
   dialect: 'postgres',
+  logging: false,
 });
 
 // Test the database connection
 sequelize
   .authenticate()
   .then(() => {
-    console.log('Database connection has been established successfully.');
+    if (process.env.NODE_ENV !== 'test') {
+      console.log('Database connection has been established successfully.');
+    }
   })
   .catch((error) => {
-    console.error('Unable to connect to the database:', error);
+    if (process.env.NODE_ENV !== 'test') {
+      console.error('Unable to connect to the database:', error);
+    }
   });
 
 module.exports = sequelize;

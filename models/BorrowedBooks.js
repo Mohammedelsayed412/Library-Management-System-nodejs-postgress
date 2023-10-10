@@ -27,5 +27,7 @@ const BorrowedBooks = sequelize.define('BorrowedBooks', {
       allowNull: false,
     },
   });
+  BorrowedBooks.belongsTo(Book, { foreignKey: 'bookId' })
+  BorrowedBooks.belongsTo(Borrower, { foreignKey: 'borrowerId' })
   
   module.exports = BorrowedBooks;

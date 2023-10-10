@@ -4,17 +4,16 @@ const borrowerRoutes = require('./routes/borrowers');
 const borrowedBooksRoutes = require('./routes/borrowedBooks');
 const bookRoutes = require('./routes/books');
 const sequelize = require('./config/database');
-
 const app = express();
 const PORT = 3000;
 
 app.use(bodyParser.json());
 
 // Routes
+
 app.use('/api/books', bookRoutes);
 app.use('/api/borrowers', borrowerRoutes);
 app.use('/api/borrowedBooks', borrowedBooksRoutes);
-
 // Error handling
 app.use((err, req, res, next) => {
   console.error(err);
@@ -26,9 +25,15 @@ sequelize
   .sync()
   .then(() => {
     app.listen(PORT, () => {
-      console.log(`Server listening on port ${PORT}`);
+      if (process.env.NODE_ENV !== 'test') {
+        console.log(`Server listening on port ${PORT}`);
+      }
     });
   })
   .catch((err) => {
-    console.error('Unable to connect to the database:', err);
+    if (process.env.NODE_ENV !== 'test') {
+      console.error('Unable to connect to the database:', err);
+    }
   });
+
+module.exports = app
